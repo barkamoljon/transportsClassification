@@ -1,15 +1,19 @@
 import streamlit as st
 import pathlib
 import plotly.express as px
-temb = pathlib.PosixPath
-pathlib.PosixPath = pathlib.WindowsPath
+import platform
 from fastai.vision.all import *
+
+plt = platform.system()
+if plt == 'Linux' : pathlib.WindowsPath = pathlib.PosixPath
 
 # title
 st.title("Transportni klassifikatsiya qiluvchi model")
 
+
 # rasmni joylash
-file = st.file_uploader('Rasm yuklash', type=(['png','jpg','jpeg','gif','svg']))
+file = st.file_uploader('Rasm yuklash', type=(['png','jpg','jpeg','gif','svg','webp']))
+
 
 if file is not None:
     img = Image.open(file)
@@ -19,13 +23,14 @@ if file is not None:
       #PIL convert
       img = PILImage.create(file)
       #model
-      model = load_learner('technologies_model.pkl')
+      model = load_learner('transport_model.pkl')
 
       # prediction
       pred, pred_id, probs = model.predict(img)
       st.success(f'Prognoz:{pred}')
       st.info(f'Ehtimollik:{probs[pred_id]*100: .1f}%')
 
+      
       #plotting
       fig = px.bar(x=probs*100, y=model.dls.vocab)
       st.plotly_chart(fig)
