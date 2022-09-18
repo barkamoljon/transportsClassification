@@ -19,7 +19,7 @@ if file is not None:
       #PIL convert
       img = PILImage.create(file)
       #model
-      model = load_learner('transport_model.pkl')
+      model = load_learner('technologies_model.pkl')
 
       # prediction
       pred, pred_id, probs = model.predict(img)
@@ -29,3 +29,5 @@ if file is not None:
       #plotting
       fig = px.bar(x=probs*100, y=model.dls.vocab)
       st.plotly_chart(fig)
+else:
+    print("Iltimos, modelga  mos rasm yuklang")
