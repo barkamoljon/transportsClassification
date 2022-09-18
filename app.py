@@ -12,7 +12,7 @@ st.title("Transportni klassifikatsiya qiluvchi model")
 
 
 # rasmni joylash
-file = st.file_uploader('Rasm yuklash', type=(['png','jpg','jpeg','gif','svg','webp']))
+file = st.file_uploader('Rasm yuklash', type=(['png','jpg','jpeg','gif','svg','webp','jfif']))
 
 
 if file is not None:
