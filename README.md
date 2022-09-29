@@ -1,2 +1,2 @@
 # transportsClassification
-Transport Classification Model
+A model that classifies cars,boats and planes
